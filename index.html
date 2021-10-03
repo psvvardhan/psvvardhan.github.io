@@ -28,9 +28,54 @@
             }
         </style>
     </noscript>
+    <script type="text/javascript">
+        // from https://stackoverflow.com/questions/26159269/convert-number-of-days-into-years-months-days#:~:text=You%20can%20modify%20the%20following%20method%20quite%20easily,days%3B%20%20year%20%3D%20value%20%3E%3D%20365%20%3F
+        function getDateDiff(date_1, date_2) {
+            //convert to UTC
+            var date2_UTC = new Date(Date.UTC(date_2.getUTCFullYear(), date_2.getUTCMonth(), date_2.getUTCDate()));
+            var date1_UTC = new Date(Date.UTC(date_1.getUTCFullYear(), date_1.getUTCMonth(), date_1.getUTCDate()));
+
+            var yAppendix, mAppendix, dAppendix;
+
+            //--------------------------------------------------------------
+            var days = date2_UTC.getDate() - date1_UTC.getDate();
+            if (days < 0) {
+                date2_UTC.setMonth(date2_UTC.getMonth() - 1);
+                days += DaysInMonth(date2_UTC);
+            }
+            //--------------------------------------------------------------
+            var months = date2_UTC.getMonth() - date1_UTC.getMonth();
+            if (months < 0) {
+                date2_UTC.setFullYear(date2_UTC.getFullYear() - 1);
+                months += 12;
+            }
+            //--------------------------------------------------------------
+            var years = date2_UTC.getFullYear() - date1_UTC.getFullYear();
+
+            if (years > 1) yAppendix = " years";
+            else yAppendix = " year";
+            if (months > 1) mAppendix = " months";
+            else mAppendix = " month";
+            if (days > 1) dAppendix = " days";
+            else dAppendix = " day";
+
+            return years + yAppendix + ", " + months + mAppendix + ", and " + days + dAppendix;
+        }
+
+        function DaysInMonth(date2_UTC) {
+            var monthStart = new Date(date2_UTC.getFullYear(), date2_UTC.getMonth(), 1);
+            var monthEnd = new Date(date2_UTC.getFullYear(), date2_UTC.getMonth() + 1, 1);
+            var monthLength = (monthEnd - monthStart) / (1000 * 60 * 60 * 24);
+            return monthLength;
+        }
+        function calculateDateDiff() {
+            console.log(getDateDiff(new Date(2008, 07, 08), new Date()));
+            document.getElementById("dateDiff").innerHTML = getDateDiff(new Date(2008, 07, 08), new Date());
+        }
+    </script>
 </head>
 
-<body id="top">
+<body id="top" onload="calculateDateDiff()">
     <header class="d-print-none">
         <div class="container text-center text-lg-left">
             <div class="py-3 clearfix">
@@ -74,7 +119,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-1 p-lg-2 text-white bg-success">
+                <div class="p-1 p-lg-2 text-white" style="background-color: rgb(142, 185, 248);">
                     <div class="row">
                         <div class="col-md-auto">
                             <a class="btn btn-light text-white menu-button" href="#profskills">Skills</a>
@@ -87,13 +132,19 @@
                                 href="#projects">Projects</a></div>
                     </div>
                 </div>
+                <div class="p-1 p-lg-2 text-white" style="background-color: rgb(142, 218, 248);">
+                    <div class="row text-dark">
+                        <span><i>How long have I been a software developer?</i></span> <br />
+                        <span>Since 8<sup>th</sup> August, 2008. So, <span id="dateDiff" /></span>.
+                    </div>
+                </div>
                 <div class="about-section pt-4 px-3 px-lg-4 mt-1">
                     <div class="row">
                         <div class="col-md-6">
                             <h2 class="h3 mb-3">About Me</h2>
                             <p>
                                 Hello! I’m Srinivas Vishnu Vardhan Pasupula. I am passionate
-                                about learning new tools and technologies and developing code. I am interested in
+                                about learning new tools and technologies and writing code. I am interested in
                                 projects that involve C/C++ and/or python development. I enjoy automating tasks by
                                 writing Python scripts. I aspire to design and develop a home automation system.
                                 <br />
@@ -775,6 +826,51 @@ Systems, Embedded Visual Control, Networked Embedded Systems, Video Processing, 
                         <div class="timeline-card timeline-card-primary card shadow-sm">
                             <div class="card-body">
                                 <div class="h5 mb-1">
+                                    Internship
+                                    <span class="text-muted h6">at Net.Orange</span>
+                                </div>
+                                <div class="text-muted text-small mb-2">
+                                    June, 2011 – March, 2012
+                                </div>
+                                <div>
+                                    <span>Learnt various technologies used in developing clinical Operating System (cOS)
+                                        and worked on internal projects. <br /><br />
+                                        <span class="h6">LogAnalyzer</span>: Is an interesting internal project I was a
+                                        part of. The cOS
+                                        generated huge sized log files on the
+                                        production system. To make it easy for the developers to go through the log, we
+                                        developed a system that analyzes
+                                        log files and indexes them using Apache Lucene. Using the index, the developers
+                                        were able to search the logs.</span>
+                                    <br /><br />
+                                    <span><span class="h6">
+                                            Achievements</span>: Selected as the best intern for that year.</span>
+                                    </span>
+                                </div>
+                                <div class="my-1">
+                                    <div class="row">
+                                        <div class="col-md-auto my-1">
+                                            <span class="h6">Technical Skills</span>:
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            Java
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            Spring MVC
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            Java Struts
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-card timeline-card-primary card shadow-sm">
+                            <div class="card-body">
+                                <div class="h5 mb-1">
                                     Summer Internship
                                     <span class="text-muted h6">in Google Summer of Code</span>
                                 </div>
@@ -1022,19 +1118,17 @@ Systems, Embedded Visual Control, Networked Embedded Systems, Video Processing, 
                                     </div>
                                 </div>
                                 <div class="my-1">
-                                    <div class="my-1">
-                                        <div class="row">
-                                            <div class="col-md-auto my-1">
-                                                <span class="h6">Technical Skills</span>:
-                                            </div>
-                                            <div
-                                                class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
-                                                C/C++
-                                            </div>
-                                            <div
-                                                class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
-                                                Open CV
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-md-auto my-1">
+                                            <span class="h6">Technical Skills</span>:
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            C/C++
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            Open CV
                                         </div>
                                     </div>
                                 </div>
@@ -1057,6 +1151,17 @@ Systems, Embedded Visual Control, Networked Embedded Systems, Video Processing, 
                                         to calibrate and help the user in learning Golf.
                                     </span>
                                 </div>
+                                <div class="my-1">
+                                    <div class="row">
+                                        <div class="col-md-auto my-1">
+                                            <span class="h6">Technical Skills</span>:
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            C/C++
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -1075,6 +1180,17 @@ Systems, Embedded Visual Control, Networked Embedded Systems, Video Processing, 
                                         ZigBee module and alerts
                                         doctors by calling and playing a pre-recorded message.
                                     </span>
+                                </div>
+                                <div class="my-1">
+                                    <div class="row">
+                                        <div class="col-md-auto my-1">
+                                            <span class="h6">Technical Skills</span>:
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            C/C++
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1095,6 +1211,17 @@ Systems, Embedded Visual Control, Networked Embedded Systems, Video Processing, 
                                         to the master ZigBee device on a periodic basis.
                                     </span>
                                 </div>
+                                <div class="my-1">
+                                    <div class="row">
+                                        <div class="col-md-auto my-1">
+                                            <span class="h6">Technical Skills</span>:
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            C/C++
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -1113,6 +1240,17 @@ Systems, Embedded Visual Control, Networked Embedded Systems, Video Processing, 
                                         which records message and
                                         plays back by calling the recipients phone.
                                     </span>
+                                </div>
+                                <div class="my-1">
+                                    <div class="row">
+                                        <div class="col-md-auto my-1">
+                                            <span class="h6">Technical Skills</span>:
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            C/C++
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1134,6 +1272,42 @@ Systems, Embedded Visual Control, Networked Embedded Systems, Video Processing, 
                                         HTML, JavaEE, IBM DB2.
                                         Our application was one among the final 20 in India.
                                     </span>
+                                </div>
+                                <div class="my-1">
+                                    <div class="row">
+                                        <div class="col-md-auto my-1">
+                                            <span class="h6">Technical Skills</span>:
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            JavaEE
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            JSP
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            Spring MVC
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            IBM DB2
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            HTML
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            CSS
+                                        </div>
+                                        <div
+                                            class="col-md-auto my-1 bg-success text-white bg-gradient rounded-pill ts-tag">
+                                            JavaScript
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1231,7 +1405,6 @@ Systems, Embedded Visual Control, Networked Embedded Systems, Video Processing, 
                     </div>
                 </div> -->
         </div>
-    </div>
     </div>
     <footer class="pt-4 pb-4 text-muted text-center d-print-none">
         <div class="container">
