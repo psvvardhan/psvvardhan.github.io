@@ -71,6 +71,7 @@
         function calculateDateDiff() {
             console.log(getDateDiff(new Date(2008, 07, 08), new Date()));
             document.getElementById("dateDiff").innerHTML = getDateDiff(new Date(2012, 07, 08), new Date());
+            document.getElementById("ageDiff").innerHTML = getDateDiff(new Date(1991, 04, 18), new Date());
         }
     </script>
 </head>
@@ -163,7 +164,7 @@
                                     <div class="pb-1">Age</div>
                                 </div>
                                 <div class="col-sm-8">
-                                    <div class="pb-1 text-secondary">30</div>
+                                    <div class="pb-1 text-secondary"><span id="ageDiff"></span></div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="pb-1">Email</div>
